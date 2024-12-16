@@ -25,7 +25,7 @@
       $user = htmlspecialchars($_GET["username"]);
       $password = htmlspecialchars($_GET["password"]);
     if(isset($user)){
-      echo shell_exec($user);
+      echo $user;
       if($user == "Admin" && $password == "ufoundmypassword")
         echo "WELLDONE";
     }
