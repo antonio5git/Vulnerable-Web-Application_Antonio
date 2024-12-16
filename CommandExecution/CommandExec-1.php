@@ -21,10 +21,11 @@
   </div>
   <div style="background-color:#ecf2d0;padding:20px;border-radius:0px 0px 20px 20px" align="center">
     <?php
-    if(isset($_GET["username"])){
+
+      $user = htmlspecialchars($_GET["username"]);
+      $password = htmlspecialchars($_GET["password"]);
+    if(isset($user)){
       echo shell_exec($user);
-      $user = $_GET["username"];
-      $password = $_GET["password"];
       if($user == "Admin" && $password == "ufoundmypassword")
         echo "WELLDONE";
     }
