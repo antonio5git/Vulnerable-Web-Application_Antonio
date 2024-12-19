@@ -19,12 +19,15 @@
       
       <?php
         echo "</br></br>";
-        
-        if (isset( $_GET[ 'file' ]))        
-        {
-          @include($_GET[ 'file' ]);
+
+        $INCLUDE_ALLOW_LIST=["file"];
+
+        $file =$_GET[ 'file' ];       
+
+         if (in_array($file, $INCLUDE_ALLOW_LIST)) {
+          include $file;
+         }
           echo"<div align='center'><b><h5>".$_GET[ 'file' ]."</h5></b></div> ";       
-        }
       ?>
    </body>
 </html>
