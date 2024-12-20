@@ -23,7 +23,7 @@
 <?php 
 	$servername = "localhost";
 	$username = "root";
-	$password = "";
+	$password = getenv('MYSQL_SECURE_PASSWORD');
 	$db = "1ccb8097d0e9ce9f154608be60224c7c";
 
 	// Create connection
@@ -37,9 +37,11 @@
 	
 	if(isset($_POST["submit"])){
 		$firstname = $_POST["firstname"];
-		$sql = "SELECT lastname FROM users WHERE firstname='$firstname'";//String
+		$sql = "SELECT lastname FROM users WHERE firstname =?";//String
 		$result = mysqli_query($conn,$sql);
-		
+		mysql_stmt_bind_param($result, "s", $firstname);
+		mysql_stmt_execute($result);
+			
 		if (mysqli_num_rows($result) > 0) {
         // output data of each row
     		while($row = mysqli_fetch_assoc($result)) {
