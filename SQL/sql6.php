@@ -20,7 +20,7 @@
 <?php
 	$servername = "localhost";
 	$username = "root";
-	$password = "";
+	$password = getenv('MYSQL_SECURE_PASSWORD');
 	$db = "1ccb8097d0e9ce9f154608be60224c7c";
 	// Create connection
 	$conn = new mysqli($servername, $username, $password,$db);
@@ -33,8 +33,10 @@
 	$source = "";
 	if(isset($_GET["submit"])){
 		$number = $_GET['number'];
-		$query = "SELECT bookname,authorname FROM books WHERE number = '$number'";
+		$query = "SELECT bookname,authorname FROM books WHERE number = ?";
 		$result = mysqli_query($conn,$query);
+		mysql_stmt_bind_param($result, "i", $number);
+		mysql_stmt_execute($result);
 		$row = @mysqli_num_rows($result);
 		echo "<hr>";
 		if($row > 0){
